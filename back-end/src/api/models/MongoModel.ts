@@ -9,7 +9,7 @@ abstract class MongoModel<T> implements ModelInterface<T, T> {
   }
 
   public create = async (obj: T)
-  : Promise<T | null> => this._model.create({ ...obj }) as T;
+  : Promise<T> => this._model.create({ ...obj }) as T;
 
   public readAll = async (): Promise<T[]> => this._model.find();
 
