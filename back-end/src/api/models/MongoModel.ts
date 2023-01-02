@@ -8,16 +8,17 @@ abstract class MongoModel<T> implements ModelInterface<T, T> {
     this._model = model(alias, schema);
   }
 
-  create = async (obj: T): Promise<T | null> => this._model.create({ ...obj }) as unknown as T;
+  public create = async (obj: T)
+  : Promise<T | null> => this._model.create({ ...obj }) as T;
 
-  readAll = async (): Promise<T[]> => this._model.find();
+  public readAll = async (): Promise<T[]> => this._model.find();
 
-  readOne = async (id: string): Promise<T | null> => this._model.findOne({ id });
+  public readOne = async (id: string): Promise<T | null> => this._model.findOne({ id });
 
-  update = async (id: string, obj: Partial<T>)
+  public update = async (id: string, obj: Partial<T>)
   : Promise<T | null> => this._model.findByIdAndUpdate(id, obj);
 
-  delete = async (id: string): Promise<T | null> => this._model.findByIdAndDelete(id);
+  public delete = async (id: string): Promise<T | null> => this._model.findByIdAndDelete(id);
 }
 
 export { MongoModel };
