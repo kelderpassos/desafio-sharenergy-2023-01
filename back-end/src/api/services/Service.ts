@@ -1,26 +1,39 @@
 import { ZodType } from 'zod';
 import { ServiceInterface } from '../interfaces/api/service.interface';
 import { ModelInterface } from '../interfaces/api/model.interface';
+import { SpecificError } from '../helpers/SpecificError';
 
 abstract class Service<T> implements ServiceInterface<T, T> {
-  constructor(protected model: ModelInterface<T, T>, private zodSchema: ZodType<T>) {}
+  constructor(protected _model: ModelInterface<T, T>, private _zodSchema: ZodType<T>) {}
 
-  create = async (obj: T): Promise<T | null> => {
-    throw new Error('Method not implemented.');
+  private zodParseValidation = (obj: unknown) => {
+    const parsed = this._zodSchema.safeParse(obj);
+
+    if (!parsed.success) throw parsed.error;
+
+    return parsed.data;
   };
 
-  readAll = async (): Promise<T[]> => {
-    throw new Error('Method not implemented.');
+  public create = async (obj: T): Promise<T | null> => {
+    const parsedData = this.zodParseValidation(obj);
+    return this._model.create(parsedData);
   };
-  readOne = async (id: string): Promise<T | null> => {
-    throw new Error('Method not implemented.');
+
+  public readAll = async (): Promise<T[]> => this._model.readAll();
+
+  public readOne = async (id: string): Promise<T | null> => {
+    const specificObject = await this._model.readOne(id);
+
+    if (!specificObject) throw SpecificError.notFound();
+
+    return specificObject;
   };
-  update = async (id: string, obj: Partial<T>): Promise<T | null> => {
-    throw new Error('Method not implemented.');
+  public update = async (id: string, obj: Partial<T>): Promise<T | null> => {
+    const parsedData = this.zodParseValidation(obj);
+
+    return parsedData;
   };
-  delete = async (id: string): Promise<T | null> => {
-    throw new Error('Method not implemented.');
-  };
+  public delete = async (id: string): Promise<T | null> => this._model.delete(id);
 }
 
 export { Service };
