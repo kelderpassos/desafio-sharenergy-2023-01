@@ -1,0 +1,14 @@
+version: "3.9"
+
+services:
+  mongodb:
+    image: mongo:6.0.3
+    container_name: sharenergy_db
+    platform: linux/x86_64
+    restart: always
+    ports:
+      - 27017:27017
+
+networks:
+  default:
+    name: sharenergy_net
