@@ -1,5 +1,5 @@
 import { Schema } from 'mongoose';
-import { UserInterface } from '../api/entities/user.interface';
+import { UserInterface } from '../infra/interfaces/entities/user.interface';
 
 const userMongooseSchema = new Schema<UserInterface>({
   name: String,

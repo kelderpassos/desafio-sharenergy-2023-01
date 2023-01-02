@@ -1,5 +1,5 @@
 import { model, Schema } from 'mongoose';
-import { ModelInterface } from '../entities/model.interface';
+import { ModelInterface } from '../interfaces/api/model.interface';
 
 abstract class MongoModel<T> implements ModelInterface<T, T> {
   protected _model;
