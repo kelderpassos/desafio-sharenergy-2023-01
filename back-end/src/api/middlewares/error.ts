@@ -16,4 +16,4 @@ const errorHandler: ErrorRequestHandler = (err: Error | ZodError, _req, res, _ne
   return res.status(500).json({ message: 'Internal Server Error', err });
 };
 
-export default errorHandler;
+export { errorHandler };
