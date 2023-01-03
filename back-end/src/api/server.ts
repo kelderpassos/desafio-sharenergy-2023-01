@@ -3,7 +3,7 @@ import 'dotenv/config';
 import { app } from './app';
 import { connectToDatabase } from '../database/connection';
 
-const PORT = process.env.PORT || 3009;
+const PORT = process.env.PORT || 3001; // to be removed latter
 connectToDatabase()
   .then(() => {
     app.listen(PORT, () => console.log(`Running server on port: ${PORT}`));
