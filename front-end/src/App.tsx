@@ -1,8 +1,11 @@
 import React from 'react';
-
+import { BrowserRouter } from 'react-router-dom';
+import { Router } from './Router';
 export const App = () => {
 
 	return (
-		<h1>teste</h1>
+		<BrowserRouter>
+			<Router />
+		</BrowserRouter>
 	);
 };
