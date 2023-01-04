@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { Router } from './Router';
-export const App = () => {
 
+export const App = () => {
 	return (
 		<BrowserRouter>
 			<Router />
