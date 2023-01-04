@@ -1,7 +1,23 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { fetchDogs } from '../helpers/api';
 
 export const Dogs = () => {
+	const [dogImage, setDogimage] = useState<string | undefined>('');
+
+	const getDogs = async () => {
+		const image = await fetchDogs();    
+		setDogimage(image);
+	};
+    
+	useEffect(() => {
+		getDogs();
+	}, []);
+
 	return (
-		<h1>teste</h1>
+		<div>
+			<main>
+				<img src={dogImage} alt='random dog image'/>
+			</main>
+		</div>
 	);
 };
