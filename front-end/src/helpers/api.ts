@@ -9,15 +9,6 @@ export const getRandomUser = async () => {
 	}
 };
 
-export const getCats = async (code: string) => {
-	try {
-		const { data } = await axios.get(`https://http.cat/${code}`);
-		return data;
-	} catch (error) {
-		console.error(error);
-	}
-};
-
 export const fetchDogs = async (): Promise<string | undefined> => {
 	try {
 		const { data } = await axios.get('https://random.dog/woof.json'); 
