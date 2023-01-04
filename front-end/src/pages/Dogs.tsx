@@ -7,14 +7,14 @@ export const Dogs = () => {
 	const [dogImage, setDogimage] = useState<string | undefined>('');
 	const [loading, setLoading] = useState<boolean>(true);
 
-	const getDogs = async () => {
+	const getDogsImage = async (): Promise<void> => {
 		const image = await fetchDogs();    
 		setDogimage(image);
 		setLoading(false);
 	};
     
 	useEffect(() => {
-		getDogs();
+		getDogsImage();
 	}, []);
 
 	return (
