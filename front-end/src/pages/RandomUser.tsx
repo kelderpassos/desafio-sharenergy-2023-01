@@ -1,7 +1,10 @@
 import React from 'react';
+import { Header } from '../components/Header';
 
 export const RandomUser = () => {
 	return (
-		<h1>teste</h1>
+		<div>
+			<Header />
+		</div>
 	);
 };
