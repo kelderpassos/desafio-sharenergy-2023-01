@@ -1,9 +1,9 @@
 import axios from 'axios';
 
-export const getRandomUser = async () => {
+export const fetchRandomUser = async () => {
 	try {
-		const { data } = await axios.get('https://randomuser.me/api/');
-		return data;
+		const { data: { results, info: { seed } } } = await axios.get('https://randomuser.me/api/');
+		return { results, seed };
 	} catch (error) {
 		console.error(error);
 	}
