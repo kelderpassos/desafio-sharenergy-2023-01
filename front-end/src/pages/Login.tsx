@@ -33,7 +33,7 @@ export const Login = () => {
 
 	const handleSubmit: FormEventHandler<HTMLFormElement> = (e) => {
 		e.preventDefault();
-		if (isChecked) setRememberMe('remember-me', 'true', 5);
+		if (isChecked) setRememberMe('remember-me', 'true', 300);
 		if (allowLogin) navigate('/random');
 	};
 

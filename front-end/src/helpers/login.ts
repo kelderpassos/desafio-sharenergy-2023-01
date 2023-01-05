@@ -4,7 +4,7 @@ export const validCredentials = (username: string, password: string) => {
 
 export const setRememberMe = (key: string, value: string, timelimit: number) => {
 	const createNewKey = new Date();
-	const obj = { value, expiry: createNewKey.getTime() + timelimit * 10000 };
+	const obj = { value, expiry: createNewKey.getTime() + (timelimit * 1000) };
 	localStorage.setItem(key, JSON.stringify(obj));
 };
 
