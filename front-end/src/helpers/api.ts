@@ -1,18 +1,17 @@
 import axios from 'axios';
+import { RandomUserType } from '../types/randomUser';
 
 export const fetchRandomUser = async () => {
 	try {
-		const { data: { results, info: { seed } } } = await axios.get('https://randomuser.me/api/');
-		const userData = {
-			seed,
-			picture: results[0].picture,
-			name: results[0].name,
-			email: results[0].email,
-			login: results[0].login,
-			dob: results[0].dob
-		};
-		
-		return userData;
+		const { data: { results } } = await axios.get('https://randomuser.me/api/?results=100');
+
+		return results.map(({ picture, name, email, login, dob }: RandomUserType) => ({
+			picture: picture,
+			name: name,
+			email: email,
+			login: login,
+			dob: dob,
+		}));
 	} catch (error) {
 		console.error(error);
 	}
