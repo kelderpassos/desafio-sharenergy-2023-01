@@ -25,3 +25,12 @@ export const fetchDogs = async (): Promise<string | undefined> => {
 		console.error(error);
 	}
 };
+
+export const fetchUsersFromDatabase = async () => {
+	try {
+		const { data } = await axios.get('http://localhost:3001/users/');		
+		return data;
+	} catch (error) {
+		console.error(error);
+	}
+};
