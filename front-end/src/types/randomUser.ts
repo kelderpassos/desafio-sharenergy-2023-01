@@ -1,5 +1,4 @@
-export type RandomUserType = {
-	seed: string,
+export interface RandomUserType {
   picture: Record<string, string>,
   name: Record<string, string>,
   email: string,
