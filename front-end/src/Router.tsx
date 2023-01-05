@@ -11,7 +11,7 @@ export const Router = () => {
 		<Routes>
 			<Route path='/' element={<Login />}/>
 			<Route path='/random' element={<RandomUser />}/>
-			<Route path='/status-codes' element={<StatusCodes />}/>
+			<Route path='/codes' element={<StatusCodes />}/>
 			<Route path='/dogs' element={<Dogs />}/>
 			<Route path='/users' element={<Users />}/>
 		</Routes>

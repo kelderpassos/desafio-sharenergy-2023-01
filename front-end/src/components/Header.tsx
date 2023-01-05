@@ -7,7 +7,7 @@ export const Header = () => {
 			<p>Sharenergy Challenge</p>
 			<section>
 				<NavLink to={'/dogs'}>Dogs</NavLink>
-				<NavLink to={'/status-codes'}>HTML Status Codes</NavLink>
+				<NavLink to={'/codes'}>HTML Status Codes</NavLink>
 				<NavLink to={'/users'}>Users</NavLink>
 			</section>
 		</header>
