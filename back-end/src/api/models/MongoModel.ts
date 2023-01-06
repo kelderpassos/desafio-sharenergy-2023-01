@@ -19,19 +19,20 @@ abstract class MongoModel<T> implements ModelInterface<T, T> {
 
   public readAll = async (): Promise<T[]> => this._model.find();
 
-  public readOne = async (id: string): Promise<T | null> => {
-    this.checkId(id);
-    return this._model.findOne({ id });
+  public readOne = async (_id: string): Promise<T | null> => {
+    this.checkId(_id);
+
+    return this._model.findById({ _id });
   };
 
-  public update = async (id: string, obj: Partial<T>): Promise<T | null> => {
-    this.checkId(id);
-    return this._model.findByIdAndUpdate(id, obj);
+  public update = async (_id: string, obj: Partial<T>): Promise<T | null> => {
+    this.checkId(_id);
+    return this._model.findByIdAndUpdate(_id, obj, { new: true });
   };
 
-  public delete = async (id: string): Promise<T | null> => {
-    this.checkId(id);
-    return this._model.findByIdAndDelete(id);
+  public delete = async (_id: string): Promise<T | null> => {
+    this.checkId(_id);
+    return this._model.findByIdAndDelete(_id);
   };
 }
 
