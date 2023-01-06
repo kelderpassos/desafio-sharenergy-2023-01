@@ -8,6 +8,9 @@ import { SpecificError } from '../../../api/helpers/SpecificError';
 describe('Users model', () => {
   const userModel = new UserModel();
 
+  const validId = '63b375808629a9d599f7e6db';
+  const INVALID_ID = 'invalid-id';
+
   afterEach(() => {
     sinon.restore();
   });
@@ -40,17 +43,17 @@ describe('Users model', () => {
     it('should return a user from database', async () => {
       sinon.stub(Model, 'findOne').resolves(userMock);
 
-      const user = await userModel.readOne('63b375808629a9d599f7e6db');
+      const user = await userModel.readOne(validId);
 
       expect(user).to.be.an('object');
       expect(user).to.be.deep.equal(userMock);
     });
 
-    it('should throw an error id is incorect', async () => {
-      sinon.stub(Model, 'findOne').resolves(userMock);
+    it('should throw an error if id is incorect', async () => {
+      sinon.stub(Model, 'findOne').resolves(null);
 
       try {
-        await userModel.readOne('invalid');
+        await userModel.readOne(INVALID_ID);
       } catch (error: any) {
         expect(error).to.be.an.instanceOf(SpecificError);
         expect(error.message).to.be.equal('Id must have 24 hexadecimal characters');
@@ -62,17 +65,17 @@ describe('Users model', () => {
     it('should update a user data in database', async () => {
       sinon.stub(Model, 'findByIdAndUpdate').resolves(userMock);
 
-      const users = await userModel.update('63b375808629a9d599f7e6db', bodyMock);
+      const users = await userModel.update(validId, bodyMock);
 
       expect(users).to.be.an('object');
       expect(users).to.be.deep.equal(userMock);
     });
 
-    it('should throw an error id is incorect', async () => {
-      sinon.stub(Model, 'findByIdAndUpdate').resolves(userMock);
+    it('should throw an error if id is incorect', async () => {
+      sinon.stub(Model, 'findByIdAndUpdate').resolves(null);
 
       try {
-        await userModel.update('invalid', bodyMock);
+        await userModel.update(INVALID_ID, bodyMock);
       } catch (error: any) {
         expect(error).to.be.an.instanceOf(SpecificError);
         expect(error.message).to.be.equal('Id must have 24 hexadecimal characters');
@@ -84,17 +87,17 @@ describe('Users model', () => {
     it('should delete a user in database', async () => {
       sinon.stub(Model, 'findByIdAndDelete').resolves(userMock);
 
-      const users = await userModel.delete('63b375808629a9d599f7e6db');
+      const users = await userModel.delete(validId);
 
       expect(users).to.be.an('object');
       expect(users).to.be.deep.equal(userMock);
     });
 
-    it('should throw an error id is incorect', async () => {
-      sinon.stub(Model, 'findByIdAndDelete').resolves(userMock);
+    it('should throw an error if id is incorect', async () => {
+      sinon.stub(Model, 'findByIdAndDelete').resolves(null);
 
       try {
-        await userModel.delete('invalid');
+        await userModel.delete(INVALID_ID);
       } catch (error: any) {
         expect(error).to.be.an.instanceOf(SpecificError);
         expect(error.message).to.be.equal('Id must have 24 hexadecimal characters');
