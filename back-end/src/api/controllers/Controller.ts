@@ -1,4 +1,4 @@
-import { RequestHandler } from 'express';
+import { Request, Response } from 'express';
 import { SpecificError } from '../helpers/SpecificError';
 import { ControllerInterface } from '../interfaces/api/controller.interface';
 import { ServiceInterface } from '../interfaces/api/service.interface';
@@ -6,7 +6,7 @@ import { ServiceInterface } from '../interfaces/api/service.interface';
 class Controler<T> implements ControllerInterface {
   constructor(protected _service: ServiceInterface<T, T>) {}
 
-  create: RequestHandler = async (req, res) => {
+  create = async (req: Request, res: Response) => {
     const { body } = req;
 
     if (!body) throw SpecificError.invalidParameter('Empty body is not allowed');
@@ -16,12 +16,12 @@ class Controler<T> implements ControllerInterface {
     return res.status(201).json(newObject);
   };
 
-  readAll: RequestHandler = async (req, res) => {
+  readAll = async (req: Request, res: Response) => {
     const allObjects = await this._service.readAll();
     return res.status(200).json(allObjects);
   };
 
-  readOne: RequestHandler = async (req, res) => {
+  readOne = async (req: Request, res: Response) => {
     const { id } = req.params;
 
     if (!id) throw SpecificError.invalidParameter('An id is necessary');
@@ -31,7 +31,7 @@ class Controler<T> implements ControllerInterface {
     return res.status(200).json(specificObject);
   };
 
-  update: RequestHandler = async (req, res) => {
+  update = async (req: Request, res: Response) => {
     const { id } = req.params;
     const { body } = req;
 
@@ -42,7 +42,7 @@ class Controler<T> implements ControllerInterface {
     return res.status(200).json(updatedObject);
   };
 
-  delete: RequestHandler = async (req, res) => {
+  delete = async (req: Request, res: Response) => {
     const { id } = req.params;
 
     if (!id) throw SpecificError.invalidParameter('An id is necessary');
