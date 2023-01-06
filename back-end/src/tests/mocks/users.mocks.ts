@@ -16,15 +16,15 @@ export const userMock = {
   __v: 0,
 };
 
-// export const updatedUserMock = {
-//   name: 'User',
-//   email: 'user@email.com',
-//   phoneNumber: 99987654321,
-//   address: 'avenue',
-//   cpf: 99999999999,
-//   _id: '63b375808629a9d599f7e6db',
-//   __v: 0,
-// };
+export const invalidBodyMock = {
+  name: '',
+  email: '',
+  phoneNumber: 0,
+  address: '',
+  cpf: 0,
+  _id: '',
+  __v: 0,
+};
 
 export const allUsersMock = [
   {
