@@ -32,14 +32,20 @@ abstract class Service<T> implements ServiceInterface<T, T> {
   public update = async (id: string, obj: Partial<T>): Promise<T | null> => {
     const parsedData = this.zodParseValidation(obj);
 
-    const updatedUser = this._model.update(id, parsedData);
+    const updatedUser = await this._model.update(id, parsedData);
 
     if (!updatedUser) throw SpecificError.notFound();
 
     return updatedUser;
   };
 
-  public delete = async (id: string): Promise<T | null> => this._model.delete(id);
+  public delete = async (id: string): Promise<T | null> => {
+    const deletedCar = await this._model.delete(id);
+
+    if (!deletedCar) throw SpecificError.notFound();
+
+    return deletedCar;
+  };
 }
 
 export { Service };
