@@ -11,7 +11,7 @@ abstract class MongoModel<T> implements ModelInterface<T, T> {
 
   // eslint-disable-next-line class-methods-use-this
   private checkId = (id: string) => {
-    if (isValidObjectId(id)) throw SpecificError.invalidParameter();
+    if (!isValidObjectId(id)) throw SpecificError.invalidParameter();
   };
 
   public create = async (obj: T)
