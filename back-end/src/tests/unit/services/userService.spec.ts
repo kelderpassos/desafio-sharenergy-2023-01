@@ -90,7 +90,7 @@ describe('User Service', () => {
       sinon.stub(userModel, 'update').resolves(null);
 
       try {
-        await userService.update(INVALID_ID, bodyMock);
+        await userService.update(VALID_ID, invalidBodyMock);
       } catch (error: any) {
         expect(error).to.be.an.instanceOf(ZodError);
       }
