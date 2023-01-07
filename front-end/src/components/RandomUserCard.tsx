@@ -1,5 +1,5 @@
 import React from 'react';
-import { RandomUserType } from '../types/randomUser';
+import { RandomUserType } from '../types/userTypes';
 
 export const RandomUserCard = ({ picture, name, email, login, dob }: RandomUserType) => {	
 	
