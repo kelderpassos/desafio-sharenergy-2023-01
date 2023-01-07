@@ -7,8 +7,10 @@ export type RandomUserType = {
 }
 
 export type UserFromDB = {
-  name: string,
+  name?: string,
   email: string,
-  phoneNumber: number,
-  address: string, cpf: number
+  phoneNumber: string,
+  address: string,
+  cpf: string,
+  _id?: string,
 }
