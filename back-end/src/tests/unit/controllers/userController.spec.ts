@@ -14,8 +14,7 @@ describe('User Controller', () => {
   const userController = new UserController(userService);
 
   const VALID_ID = '63b375808629a9d599f7e6db';
-  const INVALID_ID = 'invalid-id';
-  const NON_EXISTING_ID = '63b375808629a9d599f7e6aa';
+  const MESSAGE_UPON_DELETION = { message: 'User deleted from database successfully' };
 
   const req = {} as Request;
   const res = {} as Response;
@@ -47,7 +46,7 @@ describe('User Controller', () => {
     it('should throw an error if an empty body is sent', async () => {
       sinon.stub(userService, 'create').resolves(null);
 
-      req.body = {};
+      req.body = false;
 
       try {
         await userController.create(req, res);
@@ -72,7 +71,7 @@ describe('User Controller', () => {
     });
   });
 
-  describe('readAll', () => {
+  describe('readOne', () => {
     it('should return the correct status code and one user from database', async () => {
       sinon.stub(userService, 'readOne').resolves(userMock);
 
@@ -87,7 +86,7 @@ describe('User Controller', () => {
       expect(jsonStub.calledWith(userMock)).to.be.true;
     });
 
-    it('should throw an error if an empty body is sent', async () => {
+    it('should throw an error if no id is provided', async () => {
       sinon.stub(userService, 'readOne').resolves(null);
 
       req.params = { id: '' };
@@ -105,6 +104,7 @@ describe('User Controller', () => {
     it('should return the correct status code and one user from database', async () => {
       sinon.stub(userService, 'update').resolves(userMock);
 
+      req.body = bodyMock;
       req.params = { id: VALID_ID };
 
       await userController.update(req, res);
@@ -116,7 +116,7 @@ describe('User Controller', () => {
       expect(jsonStub.calledWith(userMock)).to.be.true;
     });
 
-    it('should throw an error if an empty body is sent', async () => {
+    it('should throw an error if no id is provided', async () => {
       sinon.stub(userService, 'update').resolves(null);
 
       req.params = { id: '' };
@@ -130,30 +130,32 @@ describe('User Controller', () => {
     });
   });
 
-  // describe('readAll', () => {
-  //   it('should return the correct status code and one user from database', async () => {
-  //     sinon.stub(userService, 'delete').resolves(userMock);
+  describe('delete', () => {
+    it('should return the correct status code and delete a user from database', async () => {
+      sinon.stub(userService, 'delete').resolves(userMock);
 
-  //     req.params = { id: VALID_ID };
+      req.params = { id: VALID_ID };
 
-  //     await userController.delete(req, res);
+      await userController.delete(req, res);
 
-  //     const resStub = res.status as sinon.SinonStub;
+      const resStub = res.status as sinon.SinonStub;
+      const jsonStub = res.json as sinon.SinonStub;
 
-  //     expect(resStub.calledWith(204)).to.be.true;
-  //   });
+      expect(resStub.calledWith(204)).to.be.true;
+      expect(jsonStub.calledWith(MESSAGE_UPON_DELETION)).to.be.true;
+    });
 
-  //   it('should throw an error if an empty body is sent', async () => {
-  //     sinon.stub(userService, 'delete').resolves(null);
+    it('should throw an error if no id is provided', async () => {
+      sinon.stub(userService, 'delete').resolves(null);
 
-  //     req.params = { id: '' };
+      req.params = { id: '' };
 
-  //     try {
-  //       await userController.delete(req, res);
-  //     } catch (error: any) {
-  //       expect(error).to.be.an.instanceOf(SpecificError);
-  //       expect(error.message).to.be.equal('An id is necessary');
-  //     }
-  //   });
-  // });
+      try {
+        await userController.delete(req, res);
+      } catch (error: any) {
+        expect(error).to.be.an.instanceOf(SpecificError);
+        expect(error.message).to.be.equal('An id is necessary');
+      }
+    });
+  });
 });
