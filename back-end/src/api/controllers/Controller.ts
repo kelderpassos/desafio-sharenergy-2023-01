@@ -49,7 +49,7 @@ class Controler<T> implements ControllerInterface {
 
     await this._service.delete(id);
 
-    return res.status(204).end();
+    return res.status(204).json({ message: 'User deleted from database successfully' });
   };
 }
 
