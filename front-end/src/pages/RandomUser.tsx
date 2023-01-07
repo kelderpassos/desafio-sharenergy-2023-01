@@ -4,7 +4,7 @@ import { Header } from '../components/Header';
 import { RandomUserCard } from '../components/RandomUserCard';
 import { fetchRandomUser } from '../helpers/api';
 import { getRememberMe } from '../helpers/login';
-import { RandomUserType } from '../types/randomUser';
+import { RandomUserType } from '../types/userTypes';
 
 export const RandomUser = () => {
 	const [search, setSearch] = useState<string>('');
