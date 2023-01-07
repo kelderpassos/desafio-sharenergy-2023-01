@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { RandomUserType } from '../types/randomUser';
+import { RandomUserType, UserFromDB } from '../types/userTypes';
 
 export const fetchRandomUser = async () => {
 	try {
@@ -30,6 +30,35 @@ export const fetchUsersFromDatabase = async () => {
 	try {
 		const { data } = await axios.get('http://localhost:3001/users/');		
 		return data;
+	} catch (error) {
+		console.error(error);
+	}
+};
+
+export const createNewUser = async (newUser: UserFromDB): Promise<number | undefined> => {
+	try {
+		const { status } = await axios.post('http://localhost:3001/users/', newUser);
+		console.log(typeof status);
+		
+		return status;
+	} catch (error) {
+		console.error(error);
+	}
+};
+
+export const deleteUser = async (id: string | undefined) => {
+	try {
+		const { status } = await axios.delete(`http://localhost:3001/users/${id}`);
+		return status;
+	} catch (error) {
+		console.error(error);
+	}
+};
+
+export const updateUser = async (id: string | undefined, info: UserFromDB) => {
+	try {
+		const { status } = await axios.put(`http://localhost:3001/users/${id}`, info);
+		return status;
 	} catch (error) {
 		console.error(error);
 	}
