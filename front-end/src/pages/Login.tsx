@@ -43,7 +43,7 @@ export const Login = () => {
 			<section className='flex flex-col items-center justify-center mt-48 bg-white'>
 				<img src={logo} alt="sharenergy's logo" className='w-[30rem] mb-5' />
 				<form 
-					className='w-[25rem] h-[15rem] 
+					className='w-[25rem] h-[15rem] mt-10
 					flex flex-col items-center justify-center 
 					rounded-[0.625rem] shadow-2xl shadow-slate-400'
 					onSubmit={handleSubmit}>
