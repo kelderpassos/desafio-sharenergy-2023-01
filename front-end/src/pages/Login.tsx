@@ -39,36 +39,53 @@ export const Login = () => {
 
 	return (
 		<div>
-			<section >
-				<h1>Sharenergy</h1>
-				<form onSubmit={handleSubmit}>
+			<section className='flex flex-col items-center justify-center mt-48 bg-white'>
+				<h1 className='font-semibold text-3xl tracking-wide mb-7'>Sharenergy Challenge</h1>
+				<form 
+					className='w-[25rem] h-[15rem] 
+					flex flex-col items-center justify-center 
+					rounded-[0.625rem] shadow-2xl shadow-slate-400'
+					onSubmit={handleSubmit}>
 					<label htmlFor="username">
 						<input 
 							name="username"
 							type="text"
-							placeholder="Provide your username"
+							placeholder="Enter your username"
 							value={username}
 							onChange={handleInput}
+							className="p-[0.5rem] placeholder-gray-700 rounded-md border border-slate-300 mb-3 "
 						/>
 					</label>
 					<label htmlFor="password">
 						<input 
 							name="password" 
 							type="password" 
-							placeholder="Provide your password" 
+							placeholder="Enter your password" 
 							value={password} 
 							onChange={handleInput}
+							className="p-[0.5rem] placeholder-gray-700 rounded-md border border-slate-300 mb-3"
 						/>
 					</label>
-					<label htmlFor=""> Remember me
+					<label htmlFor="rememberMe" className='mr-4 tracking-wide'> Remember me
 						<input 
 							type="checkbox" 
 							checked={isChecked} 
+							id='rememberMe'
 							name="remember-me"	
 							onChange={handleCheckbox}	
+							className='mb-4 ml-4'
 						/>
 					</label>
-					<button name="login" type="submit" disabled={isDisabled}>Log in</button>
+					<button 
+						name="login"
+						type="submit"
+						disabled={isDisabled}
+						className='
+							font-normal text-lg text-white tracking-wide 
+							bg-[#17a2b8]
+							enabled:hover:bg-[#108fa2] disabled:opacity-50 
+							rounded-md p-1 w-44'
+					>Log in</button>
 				</form>
 			</section>
 		</div>
