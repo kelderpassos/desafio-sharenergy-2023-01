@@ -49,50 +49,73 @@ export const UserForm = ({ create, update, _id }: UserFormProps) => {
 	};
 	
 	return (
-		<form onSubmit={onSubmit}>
-			<label htmlFor="Name">Name</label>
-			<input 
-				name="name"
-				type="text"
-				placeholder="Insert a new name"
-				value={input.name}
-				onChange={onInputChange}
-			/>
+		<form onSubmit={onSubmit} className='flex flex-col items-center justify-center my-7'>
+			<div>
+				<label className='ml-3' htmlFor="name">Name</label>
+				<input 
+					id='name'
+					name="name"
+					type="text"
+					placeholder="Insert a new name"
+					value={input.name}
+					onChange={onInputChange}
+					className="p-[0.5rem] placeholder-gray-700 rounded-md border border-slate-300 ml-3"
+				/>
 			
-			<label htmlFor="password">Email</label>
-			<input 
-				name="email" 
-				type="text" 
-				placeholder="Insert a new email" 
-				value={input.email} 
-				onChange={onInputChange}
-			/>
+				<label className='ml-3' htmlFor="email">Email</label>
+				<input
+					id='email'
+					name="email" 
+					type="text" 
+					placeholder="Insert a new email" 
+					value={input.email} 
+					onChange={onInputChange}
+					className="p-[0.5rem] placeholder-gray-700 rounded-md border border-slate-300 ml-3 "
+				/>
 			
-			<label htmlFor="password">Phone Number</label>
-			<input 
-				name="phoneNumber" 
-				type="text" 
-				placeholder="Insert a new password" 
-				value={input.phoneNumber} 
-				onChange={onInputChange}
-			/>
-			<label htmlFor="password">Address</label>
-			<input 
-				name="address" 
-				type="text" 
-				placeholder="Insert a new address" 
-				value={input.address} 
-				onChange={onInputChange}
-			/>
-			<label htmlFor="password">CPF</label>
-			<input 
-				name="cpf" 
-				type="text" 
-				placeholder="Insert a new cpf" 
-				value={input.cpf} 
-				onChange={onInputChange}
-			/>
-			<button name="createUser" type="submit" disabled={isDisabled}>{ create ? 'Create' : 'Update' }</button>
+				<label className='ml-3' htmlFor="phoneNumber">Phone Number</label>
+				<input
+					id='phoneNumber'
+					name="phoneNumber" 
+					type="text" 
+					placeholder="Insert a new password" 
+					value={input.phoneNumber} 
+					onChange={onInputChange}
+					className="p-[0.5rem] placeholder-gray-700 rounded-md border border-slate-300 ml-3 "
+				/>
+				<label className='ml-3' htmlFor="address">Address</label>
+				<input
+					id='address'
+					name="address" 
+					type="text" 
+					placeholder="Insert a new address" 
+					value={input.address} 
+					onChange={onInputChange}
+					className="p-[0.5rem] placeholder-gray-700 rounded-md border border-slate-300 ml-3 "
+				/>
+				<label className='ml-3' htmlFor="cpf">CPF</label>
+				<input
+					id='cpf'
+					name="cpf" 
+					type="text" 
+					placeholder="Insert a new cpf" 
+					value={input.cpf} 
+					onChange={onInputChange}
+					className="p-[0.5rem] placeholder-gray-700 rounded-md border border-slate-300 ml-3 "
+				/>
+			</div>
+			<div className='mt-7'>
+				<button
+					name="createUser"
+					type="submit"
+					disabled={isDisabled}
+					className='
+						font-normal text-lg text-white tracking-wide 
+						bg-[#17a2b8]
+						enabled:hover:bg-[#0d7686] disabled:opacity-50
+						rounded-md p-1 w-28 ml-2'
+				>{ create ? 'Create' : 'Update' }</button>
+			</div>
 		</form>
 	);
 };
