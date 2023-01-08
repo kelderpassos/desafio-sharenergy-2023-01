@@ -10,6 +10,7 @@ import { UserFromDB } from '../types/userTypes';
 export const Users = () => {
 	const[users, setUsers] = useState([]);
 	const[userId, setUserId] = useState<string | undefined>('');
+	const[renderInfo, setRenderInfo] = useState(false);
 	const[create, setCreate] = useState(false);
 	const[update, setUpdate] = useState(false);
 	const[deleted, setDeleted] = useState(false);
@@ -27,8 +28,14 @@ export const Users = () => {
 
 	}, [users]);
 
-	const onClickSeeInfo = (_id: string | undefined) => {
+	const onClickRenderInfo = (_id: string | undefined) => {
 		setUserId(_id);
+
+		if (renderInfo) {
+			setRenderInfo(false);
+		} else {
+			setRenderInfo(true);
+		}
 	};
 
 	const renderCard = ({ _id, email, phoneNumber, address, cpf }: UserFromDB) => {
@@ -69,17 +76,48 @@ export const Users = () => {
 	return (
 		<div>
 			<Header />
-			<main>
-				<button onClick={onClickCreateNewUser}>Create new user</button>
-				{users.map(({ name, email, phoneNumber, address, cpf, _id }: UserFromDB, i) => (
-					<div key={i}>
-						<h3>{`Name: ${name}`}</h3>
-						{renderCard({ email, phoneNumber, address, cpf, _id })}
-						<button onClick={() => onClickSeeInfo(_id)}>See info</button>
-						<button onClick={() => onClickUpdateUser()}>Update info</button>
-						<button onClick={() => onClickDeleteButton(_id)}>Delete user</button>					
-					</div>
-				))}
+			<main className='flex flex-col items-center justify-center'>
+				<button onClick={onClickCreateNewUser}
+					className='
+					font-normal text-lg text-white tracking-wide 
+					bg-[#17a2b8]
+					hover:bg-[#0d7686]
+					rounded-md p-1 w-44 my-5'
+				>Create new user</button>
+				<div className='flex items-center'>
+					{users.map(({ name, email, phoneNumber, address, cpf, _id }: UserFromDB, i) => (
+						<div key={i} 
+							className='flex flex-col items-center justify-center
+								mx-3 border border-slate-300 rounded-lg w-[25rem]'>
+							<h3 className='font-medium text-lg mt-2'>{`Name: ${name}`}</h3>
+							<button onClick={() => onClickRenderInfo(_id)}
+								className='
+							font-normal text-lg text-white tracking-wide 
+							bg-[#17a2b8]
+							hover:bg-[#0d7686]
+							rounded-md p-1 w-24 my-5'
+							>See info</button>
+
+							{renderInfo ? renderCard({ email, phoneNumber, address, cpf, _id }) : ''}
+							<div className='my-5'>
+								<button onClick={() => onClickUpdateUser()}
+									className='
+									font-normal text-lg text-white tracking-wide 
+									bg-[#17a2b8]
+									hover:bg-[#0d7686]
+									rounded-md p-1 w-28 mr-5'
+								>Update info</button>
+								<button onClick={() => onClickDeleteButton(_id)}
+									className='
+									font-normal text-lg text-white tracking-wide 
+									bg-[#17a2b8]
+									hover:bg-[#0d7686]
+									rounded-md p-1 w-28 ml-2'
+								>Delete user</button>
+							</div>				
+						</div>
+					))}
+				</div>
 				{deleted? 'User deleted from database sucessfully' : ''}
 				{create ? <UserForm create={true} /> : ''}
 				{update ? <UserForm update={true} _id={userId} /> : ''}
