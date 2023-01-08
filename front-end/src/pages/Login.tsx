@@ -1,6 +1,7 @@
 import React, { ChangeEventHandler, FormEventHandler, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getRememberMe, setRememberMe, validCredentials } from '../helpers/login';
+import logo from '../assets/logo_color.png';
 
 export const Login = () => {
 	const [username, setUsername] = useState('');
@@ -39,8 +40,8 @@ export const Login = () => {
 
 	return (
 		<div>
-			<section className='flex items-center justify-center mt-48 bg-white'>
-				<h1 className='font-semibold text-3xl tracking-wide mb-7'>Sharenergy Challenge</h1>
+			<section className='flex flex-col items-center justify-center mt-48 bg-white'>
+				<img src={logo} alt="sharenergy's logo" className='w-[30rem] mb-5' />
 				<form 
 					className='w-[25rem] h-[15rem] 
 					flex flex-col items-center justify-center 
@@ -83,7 +84,7 @@ export const Login = () => {
 						className='
 							font-normal text-lg text-white tracking-wide 
 							bg-[#17a2b8]
-							enabled:hover:bg-[#108fa2] disabled:opacity-50 
+							enabled:hover:bg-[#0d7686] disabled:opacity-50 
 							rounded-md p-1 w-44'
 					>Log in</button>
 				</form>
