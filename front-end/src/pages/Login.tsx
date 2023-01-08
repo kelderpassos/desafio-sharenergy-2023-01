@@ -39,7 +39,7 @@ export const Login = () => {
 
 	return (
 		<div>
-			<section className='flex flex-col items-center justify-center mt-48 bg-white'>
+			<section className='flex items-center justify-center mt-48 bg-white'>
 				<h1 className='font-semibold text-3xl tracking-wide mb-7'>Sharenergy Challenge</h1>
 				<form 
 					className='w-[25rem] h-[15rem] 
