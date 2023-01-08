@@ -22,7 +22,7 @@ export const StatusCodes = () => {
 			<main className='flex flex-col items-center justify-center mt-[3rem]'>
 				<label htmlFor="codes">
 					<input type="text" id="codes" placeholder='type a code here' onChange={ handleInput }
-						className="p-[0.5rem] placeholder-gray-700 rounded-md border border-slate-300 mb-3 "
+						className="p-[0.5rem] placeholder-gray-700 rounded-md border border-slate-300 mb-3"
 					/>
 				</label>
 				<div className='flex flex-col items-center justify-center w-full'>

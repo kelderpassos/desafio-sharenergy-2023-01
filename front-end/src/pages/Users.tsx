@@ -84,11 +84,11 @@ export const Users = () => {
 					hover:bg-[#0d7686]
 					rounded-md p-1 w-44 my-5'
 				>Create new user</button>
-				<div className='flex items-center'>
+				<div className='flex items-center justify-center flex-wrap'>
 					{users.map(({ name, email, phoneNumber, address, cpf, _id }: UserFromDB, i) => (
 						<div key={i} 
 							className='flex flex-col items-center justify-center
-								mx-3 border border-slate-300 rounded-lg w-[25rem]'>
+								mx-3 my-2 border border-slate-300 rounded-lg w-[25rem]'>
 							<h3 className='font-medium text-lg mt-2'>{`Name: ${name}`}</h3>
 							<button onClick={() => onClickRenderInfo(_id)}
 								className='

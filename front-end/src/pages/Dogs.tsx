@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { fetchDogs } from '../helpers/api';
 import { Header } from '../components/Header';
-import { Loading } from '../components/Loading';
 import { getRememberMe } from '../helpers/login';
 import { useNavigate } from 'react-router-dom';
 
