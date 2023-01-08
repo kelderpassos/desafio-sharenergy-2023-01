@@ -32,8 +32,20 @@ export const Dogs = () => {
 		<div>
 			<Header />
 			<main>
-				<button type="button" onClick={refreshPage}>Get a new doggie</button>
-				{loading ? <Loading page={'dogs'}/> : <img src={dogImage} alt='random dog image'/>}
+				<div className='flex flex-col items-center justify-center'>
+					<button
+						type="button"
+						onClick={refreshPage}
+						className='
+						font-normal text-lg text-white tracking-wide 
+						bg-[#17a2b8]
+						hover:bg-[#0d7686] disabled:opacity-50 
+						rounded-md p-1 w-44 my-5'
+					>Get a new doggie</button>
+					{loading ? ''
+						: <img src={dogImage} alt='random dog image'
+							className='w-[30rem] h-[30rem] pl-5 flex items-center justify-center text-2xl'/>}
+				</div>
 			</main>
 		</div>
 	);
