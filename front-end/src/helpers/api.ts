@@ -3,7 +3,23 @@ import { RandomUserType, UserFromDB } from '../types/userTypes';
 
 export const fetchRandomUser = async () => {
 	try {
-		const { data: { results } } = await axios.get('https://randomuser.me/api/?results=100');
+		const { data: { results } } = await axios.get('https://randomuser.me/api/?results=3');
+
+		return results.map(({ picture, name, email, login, dob }: RandomUserType) => ({
+			picture: picture,
+			name: name,
+			email: email,
+			login: login,
+			dob: dob,
+		}));
+	} catch (error) {
+		console.error(error);
+	}
+};
+
+export const fetchRandomUserByPage = async (page: number) => {
+	try {
+		const { data: { results } } = await axios.get(`https://randomuser.me/api/?page=${page}&results=3&seed=abc`);
 
 		return results.map(({ picture, name, email, login, dob }: RandomUserType) => ({
 			picture: picture,
