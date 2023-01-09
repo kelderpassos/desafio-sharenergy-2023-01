@@ -22,7 +22,7 @@ class App {
     this.app.use(errorHandler);
   }
 
-  public start(PORT: string | number): void {
+  public start(PORT: string | undefined): void {
     // eslint-disable-next-line no-console
     this.app.listen(PORT, () => console.log(`Running on port ${PORT}`));
   }
