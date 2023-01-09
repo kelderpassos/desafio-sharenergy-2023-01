@@ -54,7 +54,7 @@ export const Login = () => {
 							placeholder="Enter your username"
 							value={username}
 							onChange={handleInput}
-							className="p-[0.5rem] placeholder-gray-700 rounded-md border border-slate-300 mb-3 "
+							className="p-[0.5rem] placeholder-gray-700 rounded-md border border-slate-300 mb-3"
 						/>
 					</label>
 					<label htmlFor="password">
