@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from 'react';
+
 export type RandomUserType = {
   picture: Record<string, string>,
   name: Record<string, string>,
@@ -13,4 +15,9 @@ export type UserFromDB = {
   address: string,
   cpf: string,
   _id?: string,
+}
+
+export type RandomUserContextState = {
+  randomUsers: RandomUserType[],
+  setRandomUsers: Dispatch<SetStateAction<RandomUserType[]>>
 }
