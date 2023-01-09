@@ -1,25 +1,23 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext ,ChangeEventHandler } from 'react';
 import ReactPaginate from 'react-paginate';
 import { useNavigate } from 'react-router-dom';
 import { Header } from '../components/Header';
 import { RandomUserCard } from '../components/RandomUserCard';
-import { fetchRandomUserByPage, fetchRandomUser } from '../helpers/api';
+import { RandomUserContext } from '../context/randomUserContext';
+import { fetchRandomUserByPage } from '../helpers/api';
 import { getRememberMe } from '../helpers/login';
 import { RandomUserType } from '../types/userTypes';
 
 export const RandomUser = () => {
-	const [randomUsers, setRandomUsers] = useState<RandomUserType[]>([]);
+	const [searchParameter, setSearchParameter] = useState('');
+	const [selectOption, setSelectOption] = useState('');
+	const { randomUsers, setRandomUsers } = useContext(RandomUserContext);
 	const navigate = useNavigate();
 
-	const getRandomUser = async (): Promise<void> => {
-		const data = await fetchRandomUser();		
-		setRandomUsers(data);
-	};
 	
 	useEffect(() => {
 		const logged = getRememberMe('remember-me');
 		if (!logged) navigate('/');
-		getRandomUser();
 	}, []);
 
 
@@ -29,13 +27,68 @@ export const RandomUser = () => {
 		const usersByPage = await fetchRandomUserByPage(currentPage);
 		setRandomUsers(usersByPage);
 	};
+
+	const onInputChange: ChangeEventHandler<HTMLInputElement> = ({ target: { value } }) => {
+		setSearchParameter(value);
+	};
+
+	const onSelectOption: ChangeEventHandler<HTMLSelectElement> = ({ target: { value } }) => {
+		setSelectOption(value);
+	};
+
+	const onClickSearchButton = () => {
+		let filteredUser: RandomUserType[];
+		switch (selectOption) {
+		case 'name':
+			filteredUser = randomUsers.filter(({ name }) => name.first === searchParameter || 
+				name.last === searchParameter);
+			setRandomUsers(filteredUser);
+			break;
+		case 'email':
+			filteredUser = randomUsers.filter(({ email }) => email === searchParameter);
+			setRandomUsers(filteredUser);
+			break;
+		case 'username':
+			filteredUser = randomUsers.filter(({ login }) => login.username === searchParameter);
+			setRandomUsers(filteredUser);
+			break;
+		default:
+			break;
+		}
+		
+	};
 	
 	return (
 		<div>
 			<Header />
-			<main className='mt-[5rem] flex flex-col justify-center items-center'>
-				<div className='flex items-center justify-center 
-				w-full'>
+			<main className='mt-[3rem] flex flex-col justify-center items-center'>
+				<label htmlFor="">
+					<input type="text"
+						placeholder='Type a name, e-mail or username'
+						value={searchParameter}
+						onChange={onInputChange}
+						className="p-[0.5rem] pr-5 mb-3 w-[17.1rem]
+						placeholder-gray-700 rounded-md border border-slate-300"
+					/>
+				</label>
+				<select name="searchOptions"
+					onChange={onSelectOption}
+					value={selectOption}
+					className="p-[0.5rem] placeholder-gray-700 rounded-md border border-slate-300 mb-3">
+					<option value="">Choose an option</option>
+					<option value="name">Name</option>
+					<option value="email">E-mail</option>
+					<option value="username">Username</option>
+				</select>
+				<button
+					type='button'
+					onClick={onClickSearchButton}
+					className='
+						font-normal text-lg text-white tracking-wide 
+						bg-[#17a2b8]
+						hover:bg-[#0d7686]
+						rounded-md p-1 w-28 ml-2'>Search</button>
+				<div className='flex flex-wrap items-center justify-center w-[60rem] h-full'>
 					{randomUsers.map(({ picture, name, email, login, dob }: RandomUserType, i) => (
 						<div key={i}>
 							<RandomUserCard								
