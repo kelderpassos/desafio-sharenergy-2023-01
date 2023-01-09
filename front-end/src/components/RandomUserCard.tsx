@@ -4,7 +4,7 @@ import { RandomUserType } from '../types/userTypes';
 export const RandomUserCard = ({ picture, name, email, login, dob }: RandomUserType) => {	
 	
 	return (
-		<section className='border border-slate-300 rounded-lg flex flex-col items-center justify-center m-5 px-4'>
+		<section className='border border-slate-300 rounded-lg flex flex-col items-center justify-center m-5 px-4 w-[25rem]'>
 			<img src={picture.large} alt="users' thumbnails" className='mt-2' />
 			<h4 className='font-medium text-lg mt-2'>Name:</h4>
 			<p>{`${name.first + ' ' + name.last}`}</p>
