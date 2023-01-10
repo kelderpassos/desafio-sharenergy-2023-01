@@ -1,6 +1,7 @@
 import React, { ChangeEventHandler, useState, useEffect } from 'react';
 import { createNewUser, updateUser } from '../helpers/api';
-import { UserFromDB } from '../types/userTypes';
+import { invalidInputsLengths, invalidNumberInputs, validateInputs } from '../helpers/formValidations';
+import { UserFromDB, UserFormProps } from '../types/userTypes';
 
 const initialState: UserFromDB = {
 	name: '',
@@ -10,28 +11,24 @@ const initialState: UserFromDB = {
 	cpf: ''
 };
 
-type UserFormProps = {
-	update?: boolean,
-	create?: boolean,
-	_id?: string,
-}
 
 export const UserForm = ({ create, update, _id }: UserFormProps) => {	
 	const [input, setInput] = useState(initialState);
 	const [isDisabled, setIsDisabled] =  useState(true);
-
-	const enableButton = input.email.length > 2 &&
-	input.address.length > 2 &&
-	input.phoneNumber.length > 2 &&
-	input.cpf.length > 2;
-
+	const [isNumber, setIsNumber] = useState(true);
+	const [rightLengths, setRightLengths] = useState<boolean | undefined>(true);
+	
 	useEffect(() => {
-		if (enableButton) {
+		if (validateInputs(input)) {
 			setIsDisabled(false);
 		} else {
 			setIsDisabled(true);
-		}		
-	}, [input, isDisabled]);
+		}
+		
+		setIsNumber(invalidNumberInputs(input));
+		setRightLengths(invalidInputsLengths(input));
+	
+	}, [input, isDisabled, isNumber]);
 
 	const onInputChange: ChangeEventHandler<HTMLInputElement> = ({ target: { name, value } }) => {
 		setInput((prevState) => ({ ...prevState, [name]: value }));
@@ -39,13 +36,15 @@ export const UserForm = ({ create, update, _id }: UserFormProps) => {
 
 	const onSubmit: ChangeEventHandler<HTMLFormElement> = async (event) => {
 		event.preventDefault();
-
+		
 		if (create) {
 			await createNewUser(input);
 		}
 		if (update) {
 			await updateUser(_id, input);
 		}		
+
+		window.location.reload();
 	};
 	
 	return (
@@ -104,6 +103,10 @@ export const UserForm = ({ create, update, _id }: UserFormProps) => {
 					className="p-[0.5rem] placeholder-gray-700 rounded-md border border-slate-300 ml-3 "
 				/>
 			</div>
+			{!isNumber ? <p className='text-red-600 tracking-wide font-semibold mt-5'>
+				Phone Number and CPF must be only numbers</p> : ''}
+			{!rightLengths ? (<p className='text-red-600 tracking-wide font-semibold mt-5'>
+				Name, email, address must be longer then 3 chars. Phone number and CPF must be exactly 11</p>) : ''}
 			<div className='mt-7'>
 				<button
 					name="createUser"
