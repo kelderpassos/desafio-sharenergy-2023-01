@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { Header } from '../components/Header';
 import { UserForm } from '../components/UserForm';
 import { UserCard } from '../components/UserCard';
 import { deleteUser, fetchUsersFromDatabase } from '../helpers/api';
-import { getRememberMe } from '../helpers/login';
 import { UserFromDB } from '../types/userTypes';
 
 export const Users = () => {
@@ -13,8 +11,6 @@ export const Users = () => {
 	const[renderInfo, setRenderInfo] = useState(false);
 	const[create, setCreate] = useState(false);
 	const[update, setUpdate] = useState(false);
-	const[deleted, setDeleted] = useState(false);
-	const navigate = useNavigate();
 
 	const getUserFromDB = async (): Promise<void> => {
 		const data = await fetchUsersFromDatabase();		
@@ -23,8 +19,6 @@ export const Users = () => {
 
 	useEffect(() => {
 		getUserFromDB();
-		const logged = getRememberMe('remember-me');
-		if (!logged) navigate('/');
 
 	}, [users]);
 
@@ -67,11 +61,9 @@ export const Users = () => {
 		}
 	};
 
-	const onClickDeleteButton = async (id: string | undefined) => {
-		const status = await deleteUser(id);
+	const onClickDeleteButton = async (id: string | undefined) => deleteUser(id);
+		
 
-		if (status) setDeleted(true);		
-	};
 
 	return (
 		<div>
@@ -118,7 +110,6 @@ export const Users = () => {
 						</div>
 					))}
 				</div>
-				{deleted? 'User deleted from database sucessfully' : ''}
 				{create ? <UserForm create={true} /> : ''}
 				{update ? <UserForm update={true} _id={userId} /> : ''}
 			</main>
