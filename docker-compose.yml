@@ -19,12 +19,12 @@ services:
     ports:
       - 3001:3001
     environment:
-      - MONGO_URI=mongodb://mongodb:27017/sharenergy_db
+      - MONGO_URI=database://mongodb:27017/sharenergy_db
       - PORT=3001
     depends_on:
       - mongodb
 
-  mongodb:
+  database:
     image: mongo:6.0.3
     container_name: sharenergy_db
     platform: linux/x86_64
