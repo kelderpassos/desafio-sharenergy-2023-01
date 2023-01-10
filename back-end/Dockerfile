@@ -1,14 +1,14 @@
-FROM node:16:14-alpine
+FROM node:16.14-alpine
 
 WORKDIR /api
 
 COPY package*.json ./
 
-RUN npm, i
+RUN ["npm", "install"]
 
 COPY . .
 
-EXPOSE 3001
+EXPOSE 3333
 
 RUN npx tsc
 
