@@ -38,7 +38,7 @@ Uma vez o Docker instalado, realize o clone do projeto através do seguinte coma
 ```
 git@github.com:kelderpassos/desafio-sharenergy-2023-01.git
 ```
- Acesse a pasta `sharenergy-challenge` e rode o comando
+ Acesse a pasta do projeto e rode o comando
 ```
 npm run compose:up
 ```
@@ -52,3 +52,8 @@ Para remover os containers e o banco de dados rode:
 npm run compose:down
 ```
 
+# Vídeo explicativo
+
+Segue o endereço do vídeo explicativo sobre o que foi desenvolvido e como instalar:
+
+[Desafio Sharenergy por Kelder Passos](https://youtu.be/0PdCoLXGJGM)
