@@ -1,25 +1,15 @@
-import React, { useState, useEffect, useContext ,ChangeEventHandler } from 'react';
+import React, { useState, useContext ,ChangeEventHandler } from 'react';
 import ReactPaginate from 'react-paginate';
-import { useNavigate } from 'react-router-dom';
 import { Header } from '../components/Header';
 import { RandomUserCard } from '../components/RandomUserCard';
 import { RandomUserContext } from '../context/randomUserContext';
 import { fetchRandomUserByPage } from '../helpers/api';
-import { getRememberMe } from '../helpers/login';
 import { RandomUserType } from '../types/userTypes';
 
 export const RandomUser = () => {
 	const [searchParameter, setSearchParameter] = useState('');
 	const [selectOption, setSelectOption] = useState('');
 	const { randomUsers, setRandomUsers } = useContext(RandomUserContext);
-	const navigate = useNavigate();
-
-	
-	useEffect(() => {
-		const logged = getRememberMe('remember-me');
-		if (!logged) navigate('/');
-	}, []);
-
 
 	const handlePageClick = async (data: Record<string, number>) => {
 		const currentPage = data.selected + 1;

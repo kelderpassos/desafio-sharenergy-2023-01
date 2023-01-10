@@ -16,10 +16,7 @@ export const Dogs = () => {
 		setLoading(false);
 	};
     
-	useEffect(() => {
-		const logged = getRememberMe('remember-me');
-		if (!logged) navigate('/');
-		
+	useEffect(() => {	
 		getDogsImage();
 	}, [refresh]);
 

@@ -1,16 +1,8 @@
-import React, { ChangeEventHandler, useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { ChangeEventHandler, useState } from 'react';
 import { Header } from '../components/Header';
-import { getRememberMe } from '../helpers/login';
 
 export const StatusCodes = () => {
 	const [code, setCode] = useState<string>('');
-	const navigate = useNavigate();
-
-	useEffect(() => {
-		const logged = getRememberMe('remember-me');
-		if (!logged) navigate('/');
-	});
 
 	const handleInput: ChangeEventHandler<HTMLInputElement> = ({ target: { value } }) => {
 		setCode(value);
