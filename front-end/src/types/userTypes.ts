@@ -21,3 +21,9 @@ export type RandomUserContextState = {
   randomUsers: RandomUserType[],
   setRandomUsers: Dispatch<SetStateAction<RandomUserType[]>>
 }
+
+export type UserFormProps = {
+	update?: boolean,
+	create?: boolean,
+	_id?: string,
+}
