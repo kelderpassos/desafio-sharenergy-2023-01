@@ -6,11 +6,11 @@ import { deleteUser, fetchUsersFromDatabase } from '../helpers/api';
 import { UserFromDB } from '../types/userTypes';
 
 export const Users = () => {
-	const[users, setUsers] = useState([]);
-	const[userId, setUserId] = useState<string | undefined>('');
-	const[renderInfo, setRenderInfo] = useState(false);
-	const[create, setCreate] = useState(false);
-	const[update, setUpdate] = useState(false);
+	const [users, setUsers] = useState([]);
+	const [userId, setUserId] = useState<string | undefined>('');
+	const [renderInfo, setRenderInfo] = useState(false);
+	const [create, setCreate] = useState(false);
+	const [update, setUpdate] = useState(false);	
 
 	const getUserFromDB = async (): Promise<void> => {
 		const data = await fetchUsersFromDatabase();		
@@ -19,8 +19,7 @@ export const Users = () => {
 
 	useEffect(() => {
 		getUserFromDB();
-
-	}, [users]);
+	}, []);
 
 	const onClickRenderInfo = (_id: string | undefined) => {
 		setUserId(_id);
@@ -61,7 +60,10 @@ export const Users = () => {
 		}
 	};
 
-	const onClickDeleteButton = async (id: string | undefined) => deleteUser(id);
+	const onClickDeleteButton = async (id: string | undefined) => {
+		await deleteUser(id);
+		await getUserFromDB();
+	};
 		
 
 
