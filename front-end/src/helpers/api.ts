@@ -44,7 +44,7 @@ export const fetchDogs = async (): Promise<string | undefined> => {
 
 export const fetchUsersFromDatabase = async () => {
 	try {
-		const { data } = await axios.get('http://localhost:3333/users/');		
+		const { data } = await axios.get('http://localhost:3001/users/');		
 		return data;
 	} catch (error) {
 		console.error(error);
@@ -53,9 +53,7 @@ export const fetchUsersFromDatabase = async () => {
 
 export const createNewUser = async (newUser: UserFromDB): Promise<number | undefined> => {
 	try {
-		const { status } = await axios.post('http://localhost:3333/users/', newUser);
-		console.log(typeof status);
-		
+		const { status } = await axios.post('http://localhost:3001/users/', newUser);
 		return status;
 	} catch (error) {
 		console.error(error);
@@ -64,7 +62,7 @@ export const createNewUser = async (newUser: UserFromDB): Promise<number | undef
 
 export const deleteUser = async (id: string | undefined) => {
 	try {
-		const { status } = await axios.delete(`http://localhost:3333/users/${id}`);
+		const { status } = await axios.delete(`http://localhost:3001/users/${id}`);
 		return status;
 	} catch (error) {
 		console.error(error);
@@ -73,7 +71,7 @@ export const deleteUser = async (id: string | undefined) => {
 
 export const updateUser = async (id: string | undefined, info: UserFromDB) => {
 	try {
-		const { status } = await axios.put(`http://localhost:3333/users/${id}`, info);
+		const { status } = await axios.put(`http://localhost:3001/users/${id}`, info);
 		return status;
 	} catch (error) {
 		console.error(error);
