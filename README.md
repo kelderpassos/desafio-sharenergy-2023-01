@@ -55,6 +55,7 @@ Como a aplicação está no estágio de desenvolvimento, configurei para que o b
 
 <details open>
   <summary>:brazil: Versão em Português</summary>
+  
 # A aplicação:
 
 A aplicação foi elaborada conforme as especificações passadas pelo README original. Dessa forma, temos o front-end e back-end com as seguintes configurações:
